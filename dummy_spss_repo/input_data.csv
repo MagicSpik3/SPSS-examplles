@@ -1,0 +1,7 @@
+id,dor,dod,region,age,sex,status
+101,20200115,20200220,North,68,M,Deceased
+102,20210520,20210601,South,45,F,Deceased
+103,20191101,20230101,East,72,M,Deceased
+104,20220310,20220315,West,34,F,Deceased
+105,20200815,20200820,North,80,M,Deceased
+106,20211201,,South,29,F,Active
