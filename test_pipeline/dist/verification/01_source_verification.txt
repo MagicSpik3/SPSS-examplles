@@ -1,0 +1,261 @@
+Command: pspp pipeline.sps
+Status: ✅ Success
+
+=== OUTPUT ===
+SET PRINTBACK=ON.
+
+
+* ----------------------------------------------------------------
+* STEP 1: PREPARE REGIONS
+* ----------------------------------------------------------------.
+TITLE "--- DEBUG: LOADING REGIONS ---".
+
+
+GET DATA
+  /TYPE=TXT
+  /FILE='regions.csv'
+  /DELCASE=LINE
+  /DELIMITERS=','
+  /QUALIFIER='"'
+  /ARRANGEMENT=DELIMITED
+  /FIRSTCASE=2
+  /VARIABLES=
+    region_code A1
+    region_name A20.
+
+EXECUTE.
+
+
+* DEBUG: Show us the first 5 regions.
+LIST VARIABLES=ALL /CASES=5.
+
+        Data List
++-----------+-----------+
+|region_code|region_name|
++-----------+-----------+
+|N          |North      |
+|S          |South      |
+|E          |East       |
+|W          |West       |
++-----------+-----------+
+
+
+SORT CASES BY region_code.
+
+SAVE OUTFILE='temp_regions.sav'.
+
+EXECUTE.
+
+
+* ----------------------------------------------------------------
+* STEP 2: LOAD PEOPLE
+* ----------------------------------------------------------------.
+TITLE "--- DEBUG: LOADING PEOPLE ---".
+
+
+GET DATA
+  /TYPE=TXT
+  /FILE='people.csv'
+  /DELCASE=LINE
+  /DELIMITERS=','
+  /QUALIFIER='"'
+  /ARRANGEMENT=DELIMITED
+  /FIRSTCASE=2
+  /VARIABLES=
+    person_id F8.0
+    dor A8
+    dod A8
+    region_code A1
+    income F8.0.
+
+EXECUTE.
+
+
+* DEBUG: Check if we actually loaded rows.
+DESCRIPTIVES VARIABLES=income.
+
+                  Descriptive Statistics
++--------------------+-+--------+--------+-------+-------+
+|                    |N|  Mean  | Std Dev|Minimum|Maximum|
++--------------------+-+--------+--------+-------+-------+
+|income              |8|31000.00|12444.16|  15000|  50000|
+|Valid N (listwise)  |8|        |        |       |       |
+|Missing N (listwise)|0|        |        |       |       |
++--------------------+-+--------+--------+-------+-------+
+
+
+* ----------------------------------------------------------------
+* STEP 3: DATE MATH
+* ----------------------------------------------------------------.
+TITLE "--- DEBUG: DATE CALCULATIONS ---".
+
+
+* Convert strings 'YYYYMMDD' to numbers.
+COMPUTE dor_num = NUMBER(dor, F8.0).
+
+COMPUTE dod_num = NUMBER(dod, F8.0).
+
+
+* Split dates.
+COMPUTE dor_y = TRUNC(dor_num / 10000).
+
+COMPUTE dor_m = TRUNC((dor_num - dor_y * 10000) / 100).
+
+COMPUTE dor_d = dor_num - dor_y * 10000 - dor_m * 100.
+
+
+COMPUTE dod_y = TRUNC(dod_num / 10000).
+
+COMPUTE dod_m = TRUNC((dod_num - dod_y * 10000) / 100).
+
+COMPUTE dod_d = dod_num - dod_y * 10000 - dod_m * 100.
+
+EXECUTE.
+
+
+* Build standard Dates.
+COMPUTE date_reg = DATE.MDY(dor_m, dor_d, dor_y).
+
+COMPUTE date_death = DATE.MDY(dod_m, dod_d, dod_y).
+
+FORMATS date_reg date_death (ADATE10).
+
+
+* Compute delay (in days).
+COMPUTE delay_days = (date_death - date_reg) / 86400.
+
+EXECUTE.
+
+
+* DEBUG: Check if the math worked or produced missings (.).
+LIST VARIABLES=dor date_reg date_death delay_days /CASES=10.
+
+                 Data List
++--------+----------+----------+----------+
+|   dor  | date_reg |date_death|delay_days|
++--------+----------+----------+----------+
+|20190115|01/15/2019|02/10/2020|    391.00|
+|20181201|12/01/2018|12/20/2019|    384.00|
+|20200305|03/05/2020|01/10/2021|    311.00|
+|20170722|07/22/2017|01/01/2018|    163.00|
+|20200101|01/01/2020|12/31/2020|    365.00|
+|20190530|05/30/2019|06/15/2019|     16.00|
+|20161111|11/11/2016|01/11/2018|    426.00|
+|20200202|02/02/2020|02/20/2020|     18.00|
++--------+----------+----------+----------+
+
+
+* ----------------------------------------------------------------
+* STEP 4: FILTERING
+* ----------------------------------------------------------------.
+TITLE "--- DEBUG: FILTERING ---".
+
+
+* Filter negative delays.
+SELECT IF delay_days >= 0.
+
+EXECUTE.
+
+
+* DEBUG: Did we accidentally kill all the data?
+DESCRIPTIVES VARIABLES=delay_days.
+
+                 Descriptive Statistics
++--------------------+-+------+-------+-------+-------+
+|                    |N| Mean |Std Dev|Minimum|Maximum|
++--------------------+-+------+-------+-------+-------+
+|delay_days          |8|259.25| 169.55|  16.00| 426.00|
+|Valid N (listwise)  |8|      |       |       |       |
+|Missing N (listwise)|0|      |       |       |       |
++--------------------+-+------+-------+-------+-------+
+
+
+* ----------------------------------------------------------------
+* STEP 5: JOINING
+* ----------------------------------------------------------------.
+TITLE "--- DEBUG: JOINING REGIONS ---".
+
+
+SORT CASES BY region_code.
+
+
+MATCH FILES
+  /FILE=*
+  /TABLE='temp_regions.sav'
+  /BY region_code.
+
+EXECUTE.
+
+
+* DEBUG: Check if region_name is populated (or empty if join failed).
+FREQUENCIES VARIABLES=region_name.
+
+                           region_name
++-----------+---------+-------+-------------+------------------+
+|           |Frequency|Percent|Valid Percent|Cumulative Percent|
++-----------+---------+-------+-------------+------------------+
+|Valid East |        2|  25.0%|        25.0%|             25.0%|
+|      North|        2|  25.0%|        25.0%|             50.0%|
+|      South|        2|  25.0%|        25.0%|             75.0%|
+|      West |        2|  25.0%|        25.0%|            100.0%|
++-----------+---------+-------+-------------+------------------+
+|Total      |        8| 100.0%|             |                  |
++-----------+---------+-------+-------------+------------------+
+
+
+* ----------------------------------------------------------------
+* STEP 6: AGGREGATION
+* ----------------------------------------------------------------.
+TITLE "--- DEBUG: AGGREGATION ---".
+
+
+* Categorise income.
+STRING income_band (A10).
+
+IF (income < 20000) income_band = 'LOW'.
+
+IF (income >= 20000 AND income < 40000) income_band = 'MEDIUM'.
+
+IF (income >= 40000) income_band = 'HIGH'.
+
+EXECUTE.
+
+
+* Aggregate.
+AGGREGATE
+  /OUTFILE=*
+  /BREAK=region_name income_band
+  /TOTAL_DEATHS = N
+  /AVG_DELAY = MEAN(delay_days).
+
+EXECUTE.
+
+
+* DEBUG: This is what we are about to save.
+LIST VARIABLES=ALL.
+
+                    Data List
++-----------+-----------+------------+---------+
+|region_name|income_band|TOTAL_DEATHS|AVG_DELAY|
++-----------+-----------+------------+---------+
+|East       |HIGH       |           1|   311.00|
+|East       |MEDIUM     |           1|   426.00|
+|North      |LOW        |           1|   365.00|
+|North      |MEDIUM     |           1|   391.00|
+|South      |HIGH       |           1|    16.00|
+|South      |LOW        |           1|   384.00|
+|West       |MEDIUM     |           2|    90.50|
++-----------+-----------+------------+---------+
+
+
+* ----------------------------------------------------------------
+* STEP 7: SAVE
+* ----------------------------------------------------------------.
+TITLE "--- DEBUG: SAVING ---".
+
+
+SAVE TRANSLATE
+  /OUTFILE='final_output.csv'
+  /TYPE=CSV
+  /MAP
+  /REPLACE.

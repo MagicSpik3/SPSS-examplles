@@ -1,0 +1,196 @@
+# Pipeline Topology: 34 Operations
+----------------------------------------
+Operation: op_001_load
+  Type:    LOAD_CSV
+  Inputs:  []
+  Outputs: ['source_regions.csv']
+  Params:  {'filename': 'regions.csv', 'format': 'TXT'}
+
+Operation: op_002_exec
+  Type:    MATERIALIZE
+  Inputs:  ['source_regions.csv']
+  Outputs: ['ds_001_materialized']
+
+Operation: op_003_sort
+  Type:    SORT_ROWS
+  Inputs:  ['ds_001_materialized']
+  Outputs: ['ds_002_sorted']
+  Params:  {'keys': 'region_code'}
+
+Operation: op_004_save
+  Type:    SAVE_BINARY
+  Inputs:  ['ds_002_sorted']
+  Outputs: ['file_temp_regions.sav']
+  Params:  {'filename': 'temp_regions.sav'}
+
+Operation: op_005_exec
+  Type:    MATERIALIZE
+  Inputs:  ['ds_002_sorted']
+  Outputs: ['ds_003_materialized']
+
+Operation: op_006_load
+  Type:    LOAD_CSV
+  Inputs:  []
+  Outputs: ['source_people.csv']
+  Params:  {'filename': 'people.csv', 'format': 'TXT'}
+
+Operation: op_007_exec
+  Type:    MATERIALIZE
+  Inputs:  ['source_people.csv']
+  Outputs: ['ds_004_materialized']
+
+Operation: op_008_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_004_materialized']
+  Outputs: ['ds_005_derived']
+  Params:  {'target': 'dor_num', 'expression': 'NUMBER ( dor , F8.0 )'}
+
+Operation: op_009_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_005_derived']
+  Outputs: ['ds_006_derived']
+  Params:  {'target': 'dod_num', 'expression': 'NUMBER ( dod , F8.0 )'}
+
+Operation: op_010_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_006_derived']
+  Outputs: ['ds_007_derived']
+  Params:  {'target': 'dor_y', 'expression': 'TRUNC ( dor_num / 10000 )'}
+
+Operation: op_011_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_007_derived']
+  Outputs: ['ds_008_derived']
+  Params:  {'target': 'dor_m', 'expression': 'TRUNC ( ( dor_num - dor_y * 10000 ) / 100 )'}
+
+Operation: op_012_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_008_derived']
+  Outputs: ['ds_009_derived']
+  Params:  {'target': 'dor_d', 'expression': 'dor_num - dor_y * 10000 - dor_m * 100'}
+
+Operation: op_013_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_009_derived']
+  Outputs: ['ds_010_derived']
+  Params:  {'target': 'dod_y', 'expression': 'TRUNC ( dod_num / 10000 )'}
+
+Operation: op_014_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_010_derived']
+  Outputs: ['ds_011_derived']
+  Params:  {'target': 'dod_m', 'expression': 'TRUNC ( ( dod_num - dod_y * 10000 ) / 100 )'}
+
+Operation: op_015_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_011_derived']
+  Outputs: ['ds_012_derived']
+  Params:  {'target': 'dod_d', 'expression': 'dod_num - dod_y * 10000 - dod_m * 100'}
+
+Operation: op_016_exec
+  Type:    MATERIALIZE
+  Inputs:  ['ds_012_derived']
+  Outputs: ['ds_013_materialized']
+
+Operation: op_017_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_013_materialized']
+  Outputs: ['ds_014_derived']
+  Params:  {'target': 'date_reg', 'expression': 'DATE.MDY ( dor_m , dor_d , dor_y )'}
+
+Operation: op_018_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_014_derived']
+  Outputs: ['ds_015_derived']
+  Params:  {'target': 'date_death', 'expression': 'DATE.MDY ( dod_m , dod_d , dod_y )'}
+
+Operation: op_019_generic
+  Type:    GENERIC_TRANSFORM
+  Inputs:  ['ds_015_derived']
+  Outputs: ['ds_016_generic']
+  Params:  {'command': 'FORMATS'}
+
+Operation: op_020_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_016_generic']
+  Outputs: ['ds_017_derived']
+  Params:  {'target': 'delay_days', 'expression': '( date_death - date_reg ) / 86400'}
+
+Operation: op_021_exec
+  Type:    MATERIALIZE
+  Inputs:  ['ds_017_derived']
+  Outputs: ['ds_018_materialized']
+
+Operation: op_022_filter
+  Type:    FILTER_ROWS
+  Inputs:  ['ds_018_materialized']
+  Outputs: ['ds_019_filtered']
+  Params:  {'condition': 'delay_days >= 0'}
+
+Operation: op_023_exec
+  Type:    MATERIALIZE
+  Inputs:  ['ds_019_filtered']
+  Outputs: ['ds_020_materialized']
+
+Operation: op_024_sort
+  Type:    SORT_ROWS
+  Inputs:  ['ds_020_materialized']
+  Outputs: ['ds_021_sorted']
+  Params:  {'keys': 'region_code'}
+
+Operation: op_025_join
+  Type:    JOIN
+  Inputs:  ['ds_021_sorted', 'file_temp_regions.sav']
+  Outputs: ['ds_022_joined']
+  Params:  {'by': 'region_code'}
+
+Operation: op_026_exec
+  Type:    MATERIALIZE
+  Inputs:  ['ds_022_joined']
+  Outputs: ['ds_023_materialized']
+
+Operation: op_027_generic
+  Type:    GENERIC_TRANSFORM
+  Inputs:  ['ds_023_materialized']
+  Outputs: ['ds_024_generic']
+  Params:  {'command': 'STRING'}
+
+Operation: op_028_generic
+  Type:    GENERIC_TRANSFORM
+  Inputs:  ['ds_024_generic']
+  Outputs: ['ds_025_generic']
+  Params:  {'command': 'IF'}
+
+Operation: op_029_generic
+  Type:    GENERIC_TRANSFORM
+  Inputs:  ['ds_025_generic']
+  Outputs: ['ds_026_generic']
+  Params:  {'command': 'IF'}
+
+Operation: op_030_generic
+  Type:    GENERIC_TRANSFORM
+  Inputs:  ['ds_026_generic']
+  Outputs: ['ds_027_generic']
+  Params:  {'command': 'IF'}
+
+Operation: op_031_exec
+  Type:    MATERIALIZE
+  Inputs:  ['ds_027_generic']
+  Outputs: ['ds_028_materialized']
+
+Operation: op_032_aggregate
+  Type:    AGGREGATE
+  Inputs:  ['ds_028_materialized']
+  Outputs: ['ds_029_agg_active']
+  Params:  {'outfile': '*', 'break': ['region_name', 'income_band'], 'aggregations': ['TOTAL_DEATHS = N', 'AVG_DELAY = MEAN ( delay_days )']}
+
+Operation: op_033_exec
+  Type:    MATERIALIZE
+  Inputs:  ['ds_029_agg_active']
+  Outputs: ['ds_030_materialized']
+
+Operation: op_034_save
+  Type:    SAVE_BINARY
+  Inputs:  ['ds_030_materialized']
+  Outputs: ['file_final_output.csv']
+  Params:  {'filename': 'final_output.csv'}

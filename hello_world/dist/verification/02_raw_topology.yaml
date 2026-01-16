@@ -1,0 +1,19 @@
+# Pipeline Topology: 3 Operations
+----------------------------------------
+Operation: op_001_load
+  Type:    LOAD_CSV
+  Inputs:  []
+  Outputs: ['source_hello.csv']
+  Params:  {'filename': 'hello.csv', 'format': 'TXT'}
+
+Operation: op_002_sort
+  Type:    SORT_ROWS
+  Inputs:  ['source_hello.csv']
+  Outputs: ['ds_001_sorted']
+  Params:  {'keys': 'id'}
+
+Operation: op_003_save
+  Type:    SAVE_BINARY
+  Inputs:  ['ds_001_sorted']
+  Outputs: ['file_hello_sorted.csv']
+  Params:  {'filename': 'hello_sorted.csv'}

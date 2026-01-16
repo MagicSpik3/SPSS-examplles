@@ -1,0 +1,4 @@
+Command: pspp hello.sps
+Status: ✅ Success
+
+=== OUTPUT ===

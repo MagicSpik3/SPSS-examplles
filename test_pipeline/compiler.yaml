@@ -1,0 +1,6 @@
+project: "PSPP Stress Test"
+inputs:
+  primary_logic: "pipeline.sps"
+output:
+  target: "r_script"
+  path: "dist/pipeline.R"

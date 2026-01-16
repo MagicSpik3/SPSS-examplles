@@ -1,0 +1,2095 @@
+metadata:
+  generator: SpecGen v0.1
+  source_type: SPSS
+datasets:
+- id: source_control_vars.csv
+  source: file
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+- id: ds_001_derived
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+- id: ds_002_derived
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+- id: ds_003_derived
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+  - name: reference_month_n
+    type: integer
+- id: ds_004_generic
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+  - name: reference_month_n
+    type: integer
+- id: ds_005_generic
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+  - name: reference_month_n
+    type: integer
+- id: ds_006_derived
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+  - name: reference_month_n
+    type: integer
+- id: ds_007_generic
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+  - name: reference_month_n
+    type: integer
+- id: ds_008_generic
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+  - name: reference_month_n
+    type: integer
+- id: ds_009_derived
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+  - name: reference_month_n
+    type: integer
+- id: ds_010_generic
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+  - name: reference_month_n
+    type: integer
+- id: ds_011_generic
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+  - name: reference_month_n
+    type: integer
+- id: ds_012_derived
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+  - name: reference_month_n
+    type: integer
+- id: ds_013_generic
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+  - name: reference_month_n
+    type: integer
+- id: ds_014_generic
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+  - name: reference_month_n
+    type: integer
+- id: ds_015_derived
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+  - name: reference_month_n
+    type: integer
+  - name: exclude_status_s
+    type: integer
+- id: ds_016_generic
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+  - name: reference_month_n
+    type: integer
+  - name: exclude_status_s
+    type: integer
+- id: ds_017_materialized
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+  - name: reference_month_n
+    type: integer
+  - name: exclude_status_s
+    type: integer
+- id: ds_018_filtered
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+  - name: reference_month_n
+    type: integer
+  - name: exclude_status_s
+    type: integer
+- id: ds_019_derived
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+  - name: reference_month_n
+    type: integer
+  - name: exclude_status_s
+    type: integer
+  - name: join_key
+    type: integer
+- id: ds_020_materialized
+  source: derived
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+  - name: reference_month_n
+    type: integer
+  - name: exclude_status_s
+    type: integer
+  - name: join_key
+    type: integer
+- id: file_control_values.sav
+  source: file
+  columns:
+  - name: parameter
+    type: string
+  - name: value
+    type: string
+  - name: min_age_n
+    type: integer
+  - name: max_age_n
+    type: integer
+  - name: reference_month_n
+    type: integer
+  - name: exclude_status_s
+    type: integer
+  - name: join_key
+    type: integer
+- id: source_benefit_rates.csv
+  source: file
+  columns:
+  - name: benefit_type
+    type: string
+  - name: weekly_rate
+    type: integer
+- id: ds_021_generic
+  source: derived
+  columns:
+  - name: benefit_type
+    type: string
+  - name: weekly_rate
+    type: integer
+- id: file_benefit_rates.sav
+  source: file
+  columns:
+  - name: benefit_type
+    type: string
+  - name: weekly_rate
+    type: integer
+- id: source_claims_data.csv
+  source: file
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+- id: ds_022_derived
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+- id: ds_023_materialized
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+- id: ds_024_joined
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+- id: ds_025_materialized
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+- id: ds_026_derived
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+- id: ds_027_derived
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+- id: ds_028_derived
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+- id: ds_029_derived
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+- id: ds_030_derived
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+- id: ds_031_derived
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+- id: ds_032_generic
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+- id: ds_033_derived
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+- id: ds_034_derived
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+  - name: age_valid
+    type: integer
+- id: ds_035_generic
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+  - name: age_valid
+    type: integer
+- id: ds_036_generic
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+  - name: age_valid
+    type: integer
+- id: ds_037_derived
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+  - name: age_valid
+    type: integer
+  - name: status_valid
+    type: integer
+- id: ds_038_generic
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+  - name: age_valid
+    type: integer
+  - name: status_valid
+    type: integer
+- id: ds_039_derived
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+  - name: age_valid
+    type: integer
+  - name: status_valid
+    type: integer
+  - name: ref_year
+    type: integer
+- id: ds_040_derived
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+  - name: age_valid
+    type: integer
+  - name: status_valid
+    type: integer
+  - name: ref_year
+    type: integer
+  - name: ref_month
+    type: integer
+- id: ds_041_derived
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+  - name: age_valid
+    type: integer
+  - name: status_valid
+    type: integer
+  - name: ref_year
+    type: integer
+  - name: ref_month
+    type: integer
+  - name: month_start
+    type: integer
+- id: ds_042_derived
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+  - name: age_valid
+    type: integer
+  - name: status_valid
+    type: integer
+  - name: ref_year
+    type: integer
+  - name: ref_month
+    type: integer
+  - name: month_start
+    type: integer
+  - name: month_end
+    type: integer
+- id: ds_043_derived
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+  - name: age_valid
+    type: integer
+  - name: status_valid
+    type: integer
+  - name: ref_year
+    type: integer
+  - name: ref_month
+    type: integer
+  - name: month_start
+    type: integer
+  - name: month_end
+    type: integer
+  - name: eligible_start
+    type: integer
+- id: ds_044_derived
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+  - name: age_valid
+    type: integer
+  - name: status_valid
+    type: integer
+  - name: ref_year
+    type: integer
+  - name: ref_month
+    type: integer
+  - name: month_start
+    type: integer
+  - name: month_end
+    type: integer
+  - name: eligible_start
+    type: integer
+  - name: eligible_end
+    type: integer
+- id: ds_045_derived
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+  - name: age_valid
+    type: integer
+  - name: status_valid
+    type: integer
+  - name: ref_year
+    type: integer
+  - name: ref_month
+    type: integer
+  - name: month_start
+    type: integer
+  - name: month_end
+    type: integer
+  - name: eligible_start
+    type: integer
+  - name: eligible_end
+    type: integer
+  - name: eligible_days
+    type: integer
+- id: ds_046_generic
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+  - name: age_valid
+    type: integer
+  - name: status_valid
+    type: integer
+  - name: ref_year
+    type: integer
+  - name: ref_month
+    type: integer
+  - name: month_start
+    type: integer
+  - name: month_end
+    type: integer
+  - name: eligible_start
+    type: integer
+  - name: eligible_end
+    type: integer
+  - name: eligible_days
+    type: integer
+- id: ds_047_generic
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+  - name: age_valid
+    type: integer
+  - name: status_valid
+    type: integer
+  - name: ref_year
+    type: integer
+  - name: ref_month
+    type: integer
+  - name: month_start
+    type: integer
+  - name: month_end
+    type: integer
+  - name: eligible_start
+    type: integer
+  - name: eligible_end
+    type: integer
+  - name: eligible_days
+    type: integer
+- id: ds_048_joined
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+  - name: age_valid
+    type: integer
+  - name: status_valid
+    type: integer
+  - name: ref_year
+    type: integer
+  - name: ref_month
+    type: integer
+  - name: month_start
+    type: integer
+  - name: month_end
+    type: integer
+  - name: eligible_start
+    type: integer
+  - name: eligible_end
+    type: integer
+  - name: eligible_days
+    type: integer
+- id: ds_049_materialized
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+  - name: age_valid
+    type: integer
+  - name: status_valid
+    type: integer
+  - name: ref_year
+    type: integer
+  - name: ref_month
+    type: integer
+  - name: month_start
+    type: integer
+  - name: month_end
+    type: integer
+  - name: eligible_start
+    type: integer
+  - name: eligible_end
+    type: integer
+  - name: eligible_days
+    type: integer
+- id: ds_050_derived
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+  - name: age_valid
+    type: integer
+  - name: status_valid
+    type: integer
+  - name: ref_year
+    type: integer
+  - name: ref_month
+    type: integer
+  - name: month_start
+    type: integer
+  - name: month_end
+    type: integer
+  - name: eligible_start
+    type: integer
+  - name: eligible_end
+    type: integer
+  - name: eligible_days
+    type: integer
+  - name: daily_rate
+    type: integer
+- id: ds_051_derived
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+  - name: age_valid
+    type: integer
+  - name: status_valid
+    type: integer
+  - name: ref_year
+    type: integer
+  - name: ref_month
+    type: integer
+  - name: month_start
+    type: integer
+  - name: month_end
+    type: integer
+  - name: eligible_start
+    type: integer
+  - name: eligible_end
+    type: integer
+  - name: eligible_days
+    type: integer
+  - name: daily_rate
+    type: integer
+  - name: payment_amount
+    type: integer
+- id: ds_052_filtered
+  source: derived
+  columns:
+  - name: claim_id
+    type: integer
+  - name: person_id
+    type: integer
+  - name: dob
+    type: string
+  - name: claim_start
+    type: string
+  - name: claim_end
+    type: string
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: status
+    type: string
+  - name: join_key
+    type: integer
+  - name: dob_num
+    type: integer
+  - name: claim_start_num
+    type: integer
+  - name: claim_end_num
+    type: integer
+  - name: dob_date
+    type: integer
+  - name: claim_start_date
+    type: integer
+  - name: claim_end_date
+    type: integer
+  - name: age_years
+    type: integer
+  - name: age_valid
+    type: integer
+  - name: status_valid
+    type: integer
+  - name: ref_year
+    type: integer
+  - name: ref_month
+    type: integer
+  - name: month_start
+    type: integer
+  - name: month_end
+    type: integer
+  - name: eligible_start
+    type: integer
+  - name: eligible_end
+    type: integer
+  - name: eligible_days
+    type: integer
+  - name: daily_rate
+    type: integer
+  - name: payment_amount
+    type: integer
+- id: ds_053_agg_active
+  source: derived
+  columns:
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: TOTAL_PAID
+    type: integer
+- id: file_benefit_monthly_summary.csv
+  source: file
+  columns:
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: TOTAL_PAID
+    type: integer
+- id: ds_054_generic
+  source: derived
+  columns:
+  - name: benefit_type
+    type: string
+  - name: region
+    type: string
+  - name: TOTAL_PAID
+    type: integer
+operations:
+- id: op_001_load
+  type: load_csv
+  inputs: []
+  outputs:
+  - source_control_vars.csv
+  parameters:
+    filename: control_vars.csv
+    format: TXT
+- id: op_002_compute
+  type: compute_columns
+  inputs:
+  - source_control_vars.csv
+  outputs:
+  - ds_001_derived
+  parameters:
+    target: min_age_n
+    expression: $SYSMIS
+- id: op_003_compute
+  type: compute_columns
+  inputs:
+  - ds_001_derived
+  outputs:
+  - ds_002_derived
+  parameters:
+    target: max_age_n
+    expression: $SYSMIS
+- id: op_004_compute
+  type: compute_columns
+  inputs:
+  - ds_002_derived
+  outputs:
+  - ds_003_derived
+  parameters:
+    target: reference_month_n
+    expression: $SYSMIS
+- id: op_005_generic
+  type: generic_transform
+  inputs:
+  - ds_003_derived
+  outputs:
+  - ds_004_generic
+  parameters:
+    command: STRING
+- id: op_006_generic
+  type: generic_transform
+  inputs:
+  - ds_004_generic
+  outputs:
+  - ds_005_generic
+  parameters:
+    command: DO
+- id: op_007_compute
+  type: compute_columns
+  inputs:
+  - ds_005_generic
+  outputs:
+  - ds_006_derived
+  parameters:
+    target: min_age_n
+    expression: NUMBER ( value , F3.0 )
+- id: op_008_generic
+  type: generic_transform
+  inputs:
+  - ds_006_derived
+  outputs:
+  - ds_007_generic
+  parameters:
+    command: END
+- id: op_009_generic
+  type: generic_transform
+  inputs:
+  - ds_007_generic
+  outputs:
+  - ds_008_generic
+  parameters:
+    command: DO
+- id: op_010_compute
+  type: compute_columns
+  inputs:
+  - ds_008_generic
+  outputs:
+  - ds_009_derived
+  parameters:
+    target: max_age_n
+    expression: NUMBER ( value , F3.0 )
+- id: op_011_generic
+  type: generic_transform
+  inputs:
+  - ds_009_derived
+  outputs:
+  - ds_010_generic
+  parameters:
+    command: END
+- id: op_012_generic
+  type: generic_transform
+  inputs:
+  - ds_010_generic
+  outputs:
+  - ds_011_generic
+  parameters:
+    command: DO
+- id: op_013_compute
+  type: compute_columns
+  inputs:
+  - ds_011_generic
+  outputs:
+  - ds_012_derived
+  parameters:
+    target: reference_month_n
+    expression: NUMBER ( value , F6.0 )
+- id: op_014_generic
+  type: generic_transform
+  inputs:
+  - ds_012_derived
+  outputs:
+  - ds_013_generic
+  parameters:
+    command: END
+- id: op_015_generic
+  type: generic_transform
+  inputs:
+  - ds_013_generic
+  outputs:
+  - ds_014_generic
+  parameters:
+    command: DO
+- id: op_016_compute
+  type: compute_columns
+  inputs:
+  - ds_014_generic
+  outputs:
+  - ds_015_derived
+  parameters:
+    target: exclude_status_s
+    expression: value
+- id: op_017_generic
+  type: generic_transform
+  inputs:
+  - ds_015_derived
+  outputs:
+  - ds_016_generic
+  parameters:
+    command: END
+- id: op_018_exec
+  type: materialize
+  inputs:
+  - ds_016_generic
+  outputs:
+  - ds_017_materialized
+  parameters: {}
+- id: op_019_filter
+  type: filter_rows
+  inputs:
+  - ds_017_materialized
+  outputs:
+  - ds_018_filtered
+  parameters:
+    condition: NOT MISSING ( min_age_n )
+- id: op_020_compute
+  type: compute_columns
+  inputs:
+  - ds_018_filtered
+  outputs:
+  - ds_019_derived
+  parameters:
+    target: join_key
+    expression: '1'
+- id: op_021_exec
+  type: materialize
+  inputs:
+  - ds_019_derived
+  outputs:
+  - ds_020_materialized
+  parameters: {}
+- id: op_022_save
+  type: save_binary
+  inputs:
+  - ds_020_materialized
+  outputs:
+  - file_control_values.sav
+  parameters:
+    filename: control_values.sav
+- id: op_023_load
+  type: load_csv
+  inputs: []
+  outputs:
+  - source_benefit_rates.csv
+  parameters:
+    filename: benefit_rates.csv
+    format: TXT
+- id: op_024_generic
+  type: generic_transform
+  inputs:
+  - source_benefit_rates.csv
+  outputs:
+  - ds_021_generic
+  parameters:
+    command: SORT
+- id: op_025_save
+  type: save_binary
+  inputs:
+  - ds_021_generic
+  outputs:
+  - file_benefit_rates.sav
+  parameters:
+    filename: benefit_rates.sav
+- id: op_026_load
+  type: load_csv
+  inputs: []
+  outputs:
+  - source_claims_data.csv
+  parameters:
+    filename: claims_data.csv
+    format: TXT
+- id: op_027_compute
+  type: compute_columns
+  inputs:
+  - source_claims_data.csv
+  outputs:
+  - ds_022_derived
+  parameters:
+    target: join_key
+    expression: '1'
+- id: op_028_exec
+  type: materialize
+  inputs:
+  - ds_022_derived
+  outputs:
+  - ds_023_materialized
+  parameters: {}
+- id: op_029_join
+  type: join
+  inputs:
+  - ds_023_materialized
+  outputs:
+  - ds_024_joined
+  parameters:
+    by: join_key
+- id: op_030_exec
+  type: materialize
+  inputs:
+  - ds_024_joined
+  outputs:
+  - ds_025_materialized
+  parameters: {}
+- id: op_031_compute
+  type: compute_columns
+  inputs:
+  - ds_025_materialized
+  outputs:
+  - ds_026_derived
+  parameters:
+    target: dob_num
+    expression: NUMBER ( dob , F8.0 )
+- id: op_032_compute
+  type: compute_columns
+  inputs:
+  - ds_026_derived
+  outputs:
+  - ds_027_derived
+  parameters:
+    target: claim_start_num
+    expression: NUMBER ( claim_start , F8.0 )
+- id: op_033_compute
+  type: compute_columns
+  inputs:
+  - ds_027_derived
+  outputs:
+  - ds_028_derived
+  parameters:
+    target: claim_end_num
+    expression: NUMBER ( claim_end , F8.0 )
+- id: op_034_compute
+  type: compute_columns
+  inputs:
+  - ds_028_derived
+  outputs:
+  - ds_029_derived
+  parameters:
+    target: dob_date
+    expression: DATE.MDY ( TRUNC ( MOD ( dob_num , 10000 ) / 100 ) , MOD ( dob_num
+      , 100 ) , TRUNC ( dob_num / 10000 ) )
+- id: op_035_compute
+  type: compute_columns
+  inputs:
+  - ds_029_derived
+  outputs:
+  - ds_030_derived
+  parameters:
+    target: claim_start_date
+    expression: DATE.MDY ( TRUNC ( MOD ( claim_start_num , 10000 ) / 100 ) , MOD (
+      claim_start_num , 100 ) , TRUNC ( claim_start_num / 10000 ) )
+- id: op_036_compute
+  type: compute_columns
+  inputs:
+  - ds_030_derived
+  outputs:
+  - ds_031_derived
+  parameters:
+    target: claim_end_date
+    expression: DATE.MDY ( TRUNC ( MOD ( claim_end_num , 10000 ) / 100 ) , MOD ( claim_end_num
+      , 100 ) , TRUNC ( claim_end_num / 10000 ) )
+- id: op_037_generic
+  type: generic_transform
+  inputs:
+  - ds_031_derived
+  outputs:
+  - ds_032_generic
+  parameters:
+    command: FORMATS
+- id: op_038_compute
+  type: compute_columns
+  inputs:
+  - ds_032_generic
+  outputs:
+  - ds_033_derived
+  parameters:
+    target: age_years
+    expression: TRUNC ( ( claim_start_date - dob_date ) / ( 365.25 * 86400 ) )
+- id: op_039_compute
+  type: compute_columns
+  inputs:
+  - ds_033_derived
+  outputs:
+  - ds_034_derived
+  parameters:
+    target: age_valid
+    expression: '1'
+- id: op_040_generic
+  type: generic_transform
+  inputs:
+  - ds_034_derived
+  outputs:
+  - ds_035_generic
+  parameters:
+    command: IF
+- id: op_041_generic
+  type: generic_transform
+  inputs:
+  - ds_035_generic
+  outputs:
+  - ds_036_generic
+  parameters:
+    command: IF
+- id: op_042_compute
+  type: compute_columns
+  inputs:
+  - ds_036_generic
+  outputs:
+  - ds_037_derived
+  parameters:
+    target: status_valid
+    expression: '1'
+- id: op_043_generic
+  type: generic_transform
+  inputs:
+  - ds_037_derived
+  outputs:
+  - ds_038_generic
+  parameters:
+    command: IF
+- id: op_044_compute
+  type: compute_columns
+  inputs:
+  - ds_038_generic
+  outputs:
+  - ds_039_derived
+  parameters:
+    target: ref_year
+    expression: TRUNC ( reference_month_n / 100 )
+- id: op_045_compute
+  type: compute_columns
+  inputs:
+  - ds_039_derived
+  outputs:
+  - ds_040_derived
+  parameters:
+    target: ref_month
+    expression: MOD ( reference_month_n , 100 )
+- id: op_046_compute
+  type: compute_columns
+  inputs:
+  - ds_040_derived
+  outputs:
+  - ds_041_derived
+  parameters:
+    target: month_start
+    expression: DATE.MDY ( ref_month , 1 , ref_year )
+- id: op_047_compute
+  type: compute_columns
+  inputs:
+  - ds_041_derived
+  outputs:
+  - ds_042_derived
+  parameters:
+    target: month_end
+    expression: DATE.MDY ( ref_month + 1 , 1 , ref_year ) - 1
+- id: op_048_compute
+  type: compute_columns
+  inputs:
+  - ds_042_derived
+  outputs:
+  - ds_043_derived
+  parameters:
+    target: eligible_start
+    expression: MAX ( claim_start_date , month_start )
+- id: op_049_compute
+  type: compute_columns
+  inputs:
+  - ds_043_derived
+  outputs:
+  - ds_044_derived
+  parameters:
+    target: eligible_end
+    expression: MIN ( claim_end_date , month_end )
+- id: op_050_compute
+  type: compute_columns
+  inputs:
+  - ds_044_derived
+  outputs:
+  - ds_045_derived
+  parameters:
+    target: eligible_days
+    expression: ( eligible_end - eligible_start ) / 86400 + 1
+- id: op_051_generic
+  type: generic_transform
+  inputs:
+  - ds_045_derived
+  outputs:
+  - ds_046_generic
+  parameters:
+    command: IF
+- id: op_052_generic
+  type: generic_transform
+  inputs:
+  - ds_046_generic
+  outputs:
+  - ds_047_generic
+  parameters:
+    command: SORT
+- id: op_053_join
+  type: join
+  inputs:
+  - ds_047_generic
+  outputs:
+  - ds_048_joined
+  parameters:
+    by: benefit_type
+- id: op_054_exec
+  type: materialize
+  inputs:
+  - ds_048_joined
+  outputs:
+  - ds_049_materialized
+  parameters: {}
+- id: op_055_compute
+  type: compute_columns
+  inputs:
+  - ds_049_materialized
+  outputs:
+  - ds_050_derived
+  parameters:
+    target: daily_rate
+    expression: weekly_rate / 7
+- id: op_056_compute
+  type: compute_columns
+  inputs:
+  - ds_050_derived
+  outputs:
+  - ds_051_derived
+  parameters:
+    target: payment_amount
+    expression: eligible_days * daily_rate
+- id: op_057_filter
+  type: filter_rows
+  inputs:
+  - ds_051_derived
+  outputs:
+  - ds_052_filtered
+  parameters:
+    condition: ( age_valid = 1 AND status_valid = 1 AND eligible_days > 0 )
+- id: op_058_aggregate
+  type: aggregate
+  inputs:
+  - ds_052_filtered
+  outputs:
+  - ds_053_agg_active
+  parameters:
+    outfile: '*'
+    break:
+    - benefit_type
+    - region
+    aggregations:
+    - TOTAL_PAID = SUM ( payment_amount )
+- id: op_059_save
+  type: save_binary
+  inputs:
+  - ds_053_agg_active
+  outputs:
+  - file_benefit_monthly_summary.csv
+  parameters:
+    filename: benefit_monthly_summary.csv
+- id: op_060_generic
+  type: generic_transform
+  inputs:
+  - ds_053_agg_active
+  outputs:
+  - ds_054_generic
+  parameters:
+    command: LIST
