@@ -142,7 +142,7 @@ Operation: op_025_join
   Type:    JOIN
   Inputs:  ['ds_021_sorted', 'file_temp_regions.sav']
   Outputs: ['ds_022_joined']
-  Params:  {'by': 'region_code'}
+  Params:  {'by': ['region_code'], 'type': 'LEFT', 'right_table': 'temp_regions.sav'}
 
 Operation: op_026_exec
   Type:    MATERIALIZE
@@ -155,27 +155,27 @@ Operation: op_027_generic
   Outputs: ['ds_024_generic']
   Params:  {'command': 'STRING'}
 
-Operation: op_028_generic
-  Type:    GENERIC_TRANSFORM
+Operation: op_028_compute_if
+  Type:    COMPUTE_COLUMNS
   Inputs:  ['ds_024_generic']
-  Outputs: ['ds_025_generic']
-  Params:  {'command': 'IF'}
+  Outputs: ['ds_025_derived']
+  Params:  {'target': 'income_band', 'expression': "'LOW'", 'condition': '( income < 20000 )'}
 
-Operation: op_029_generic
-  Type:    GENERIC_TRANSFORM
-  Inputs:  ['ds_025_generic']
-  Outputs: ['ds_026_generic']
-  Params:  {'command': 'IF'}
+Operation: op_029_compute_if
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_025_derived']
+  Outputs: ['ds_026_derived']
+  Params:  {'target': 'income_band', 'expression': "'MEDIUM'", 'condition': '( income >= 20000 AND income < 40000 )'}
 
-Operation: op_030_generic
-  Type:    GENERIC_TRANSFORM
-  Inputs:  ['ds_026_generic']
-  Outputs: ['ds_027_generic']
-  Params:  {'command': 'IF'}
+Operation: op_030_compute_if
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_026_derived']
+  Outputs: ['ds_027_derived']
+  Params:  {'target': 'income_band', 'expression': "'HIGH'", 'condition': '( income >= 40000 )'}
 
 Operation: op_031_exec
   Type:    MATERIALIZE
-  Inputs:  ['ds_027_generic']
+  Inputs:  ['ds_027_derived']
   Outputs: ['ds_028_materialized']
 
 Operation: op_032_aggregate

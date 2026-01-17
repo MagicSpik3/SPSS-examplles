@@ -1,0 +1,152 @@
+SPSS:
+GET DATA
+/TYPE=TXT
+/FILE='regions.csv'
+/DELCASE=LINE
+/DELIMITERS=','
+/QUALIFIER='"'
+/ARRANGEMENT=DELIMITED
+/FIRSTCASE=2
+/VARIABLES=
+  region_code A1
+region_name A20.
+EXECUTE.
+
+State:
+Operation: op_001_load
+Type:    LOAD_CSV
+Inputs:  []
+Outputs: ['source_regions.csv']
+Params:  {'filename': 'regions.csv', 'format': 'TXT'}  
+
+R:
+# Op: op_001_load
+source_regions.csv <- read_csv("regions.csv")
+
+SPSS:
+* DEBUG: Show us the first 5 regions.
+LIST VARIABLES=ALL /CASES=5.
+(ignored)
+
+SPSS:
+SORT CASES BY region_code.
+
+State:
+Operation: op_003_sort
+Type:    SORT_ROWS
+Inputs:  ['ds_001_materialized']
+Outputs: ['ds_002_sorted']
+Params:  {'keys': 'region_code'}
+
+R:
+# Op: op_003_sort
+ds_002_sorted <- ds_001_materialized %>% arrange(region_code)
+
+SPSS:
+SAVE OUTFILE='temp_regions.sav'.
+
+State:
+Operation: op_004_save
+Type:    SAVE_BINARY
+Inputs:  ['ds_002_sorted']
+Outputs: ['file_temp_regions.sav']
+Params:  {'filename': 'temp_regions.sav'}
+
+R:
+# Op: op_004_save
+write_csv(ds_002_sorted, "temp_regions.sav")
+
+SPSS:
+EXECUTE.
+
+State:
+Operation: op_005_exec
+Type:    MATERIALIZE
+Inputs:  ['ds_002_sorted']
+Outputs: ['ds_003_materialized']
+
+R:
+# Op: op_005_exec
+ds_003_materialized <- ds_002_sorted
+
+SPSS:
+TITLE "--- DEBUG: LOADING PEOPLE ---".
+(ignored)
+
+SPSS:
+  GET DATA
+/TYPE=TXT
+/FILE='people.csv'
+/DELCASE=LINE
+/DELIMITERS=','
+/QUALIFIER='"'
+/ARRANGEMENT=DELIMITED
+/FIRSTCASE=2
+/VARIABLES=
+  person_id F8.0
+dor A8
+dod A8
+region_code A1
+income F8.0.
+
+State:
+Operation: op_006_load
+Type:    LOAD_CSV
+Inputs:  []
+Outputs: ['source_people.csv']
+Params:  {'filename': 'people.csv', 'format': 'TXT'}
+
+R:
+# Op: op_006_load
+source_people.csv <- read_csv("people.csv")
+
+SPSS:
+EXECUTE.
+
+State:
+Operation: op_007_exec
+Type:    MATERIALIZE
+Inputs:  ['source_people.csv']
+Outputs: ['ds_004_materialized']
+
+R:
+# Op: op_007_exec
+ds_004_materialized <- source_people.csv
+
+SPSS:
+DESCRIPTIVES VARIABLES=income.
+TITLE "--- DEBUG: DATE CALCULATIONS ---".
+(ignored)
+
+SPSS:
+COMPUTE dor_num = NUMBER(dor, F8.0).
+COMPUTE dod_num = NUMBER(dod, F8.0).
+COMPUTE dor_y = TRUNC(dor_num / 10000).
+COMPUTE dor_m = TRUNC((dor_num - dor_y * 10000) / 100).
+COMPUTE dor_d = dor_num - dor_y * 10000 - dor_m * 100.
+COMPUTE dod_y = TRUNC(dod_num / 10000).
+COMPUTE dod_m = TRUNC((dod_num - dod_y * 10000) / 100).
+COMPUTE dod_d = dod_num - dod_y * 10000 - dod_m * 100.
+EXECUTE.
+
+State:
+Operation: batch_op_008_compute
+Type:    BATCH_COMPUTE
+Inputs:  ['ds_004_materialized']
+Outputs: ['ds_012_derived']
+Params:  {'computes': [{'target': 'dor_num', 'expression': 'NUMBER ( dor , F8.0 )'}, {'target': 'dod_num', 'expression': 'NUMBER ( dod , F8.0 )'}, {'target': 'dor_y', 'expression': 'TRUNC ( dor_num / 10000 )'}, {'target': 'dor_m', 'expression': 'TRUNC ( ( dor_num - dor_y * 10000 ) / 100 )'}, {'target': 'dor_d', 'expression': 'dor_num - dor_y * 10000 - dor_m * 100'}, {'target': 'dod_y', 'expression': 'TRUNC ( dod_num / 10000 )'}, {'target': 'dod_m', 'expression': 'TRUNC ( ( dod_num - dod_y * 10000 ) / 100 )'}, {'target': 'dod_d', 'expression': 'dod_num - dod_y * 10000 - dod_m * 100'}]}
+
+R:
+  ds_012_derived <- ds_004_materialized %>%
+  mutate(
+    dor_num = NUMBER ( dor , F8.0 ),
+    dod_num = NUMBER ( dod , F8.0 ),
+    dor_y = TRUNC ( dor_num / 10000 ),
+    dor_m = TRUNC ( ( dor_num - dor_y * 10000 ) / 100 ),
+    dor_d = dor_num - dor_y * 10000 - dor_m * 100,
+    dod_y = TRUNC ( dod_num / 10000 ),
+    dod_m = TRUNC ( ( dod_num - dod_y * 10000 ) / 100 ),
+    dod_d = dod_num - dod_y * 10000 - dod_m * 100
+  )
+
+

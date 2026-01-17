@@ -1,0 +1,350 @@
+# Pipeline Topology: 59 Operations
+----------------------------------------
+Operation: op_001_load
+  Type:    LOAD_CSV
+  Inputs:  []
+  Outputs: ['source_control_vars.csv']
+  Params:  {'filename': 'control_vars.csv', 'format': 'TXT'}
+
+Operation: op_002_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['source_control_vars.csv']
+  Outputs: ['ds_001_derived']
+  Params:  {'target': 'min_age_n', 'expression': '$SYSMIS'}
+
+Operation: op_003_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_001_derived']
+  Outputs: ['ds_002_derived']
+  Params:  {'target': 'max_age_n', 'expression': '$SYSMIS'}
+
+Operation: op_004_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_002_derived']
+  Outputs: ['ds_003_derived']
+  Params:  {'target': 'reference_month_n', 'expression': '$SYSMIS'}
+
+Operation: op_005_generic
+  Type:    GENERIC_TRANSFORM
+  Inputs:  ['ds_003_derived']
+  Outputs: ['ds_004_generic']
+  Params:  {'command': 'STRING'}
+
+Operation: op_006_generic
+  Type:    GENERIC_TRANSFORM
+  Inputs:  ['ds_004_generic']
+  Outputs: ['ds_005_generic']
+  Params:  {'command': 'DO'}
+
+Operation: op_007_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_005_generic']
+  Outputs: ['ds_006_derived']
+  Params:  {'target': 'min_age_n', 'expression': 'NUMBER ( value , F3.0 )'}
+
+Operation: op_008_generic
+  Type:    GENERIC_TRANSFORM
+  Inputs:  ['ds_006_derived']
+  Outputs: ['ds_007_generic']
+  Params:  {'command': 'END'}
+
+Operation: op_009_generic
+  Type:    GENERIC_TRANSFORM
+  Inputs:  ['ds_007_generic']
+  Outputs: ['ds_008_generic']
+  Params:  {'command': 'DO'}
+
+Operation: op_010_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_008_generic']
+  Outputs: ['ds_009_derived']
+  Params:  {'target': 'max_age_n', 'expression': 'NUMBER ( value , F3.0 )'}
+
+Operation: op_011_generic
+  Type:    GENERIC_TRANSFORM
+  Inputs:  ['ds_009_derived']
+  Outputs: ['ds_010_generic']
+  Params:  {'command': 'END'}
+
+Operation: op_012_generic
+  Type:    GENERIC_TRANSFORM
+  Inputs:  ['ds_010_generic']
+  Outputs: ['ds_011_generic']
+  Params:  {'command': 'DO'}
+
+Operation: op_013_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_011_generic']
+  Outputs: ['ds_012_derived']
+  Params:  {'target': 'reference_month_n', 'expression': 'NUMBER ( value , F6.0 )'}
+
+Operation: op_014_generic
+  Type:    GENERIC_TRANSFORM
+  Inputs:  ['ds_012_derived']
+  Outputs: ['ds_013_generic']
+  Params:  {'command': 'END'}
+
+Operation: op_015_generic
+  Type:    GENERIC_TRANSFORM
+  Inputs:  ['ds_013_generic']
+  Outputs: ['ds_014_generic']
+  Params:  {'command': 'DO'}
+
+Operation: op_016_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_014_generic']
+  Outputs: ['ds_015_derived']
+  Params:  {'target': 'exclude_status_s', 'expression': 'value'}
+
+Operation: op_017_generic
+  Type:    GENERIC_TRANSFORM
+  Inputs:  ['ds_015_derived']
+  Outputs: ['ds_016_generic']
+  Params:  {'command': 'END'}
+
+Operation: op_018_exec
+  Type:    MATERIALIZE
+  Inputs:  ['ds_016_generic']
+  Outputs: ['ds_017_materialized']
+
+Operation: op_019_filter
+  Type:    FILTER_ROWS
+  Inputs:  ['ds_017_materialized']
+  Outputs: ['ds_018_filtered']
+  Params:  {'condition': 'NOT MISSING ( min_age_n )'}
+
+Operation: op_020_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_018_filtered']
+  Outputs: ['ds_019_derived']
+  Params:  {'target': 'join_key', 'expression': '1'}
+
+Operation: op_021_exec
+  Type:    MATERIALIZE
+  Inputs:  ['ds_019_derived']
+  Outputs: ['ds_020_materialized']
+
+Operation: op_022_save
+  Type:    SAVE_BINARY
+  Inputs:  ['ds_020_materialized']
+  Outputs: ['file_control_values.sav']
+  Params:  {'filename': 'control_values.sav'}
+
+Operation: op_023_load
+  Type:    LOAD_CSV
+  Inputs:  []
+  Outputs: ['source_benefit_rates.csv']
+  Params:  {'filename': 'benefit_rates.csv', 'format': 'TXT'}
+
+Operation: op_024_sort
+  Type:    SORT_ROWS
+  Inputs:  ['source_benefit_rates.csv']
+  Outputs: ['ds_021_sorted']
+  Params:  {'keys': 'benefit_type'}
+
+Operation: op_025_save
+  Type:    SAVE_BINARY
+  Inputs:  ['ds_021_sorted']
+  Outputs: ['file_benefit_rates.sav']
+  Params:  {'filename': 'benefit_rates.sav'}
+
+Operation: op_026_load
+  Type:    LOAD_CSV
+  Inputs:  []
+  Outputs: ['source_claims_data.csv']
+  Params:  {'filename': 'claims_data.csv', 'format': 'TXT'}
+
+Operation: op_027_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['source_claims_data.csv']
+  Outputs: ['ds_022_derived']
+  Params:  {'target': 'join_key', 'expression': '1'}
+
+Operation: op_028_exec
+  Type:    MATERIALIZE
+  Inputs:  ['ds_022_derived']
+  Outputs: ['ds_023_materialized']
+
+Operation: op_029_join
+  Type:    JOIN
+  Inputs:  ['ds_023_materialized', 'file_control_values.sav']
+  Outputs: ['ds_024_joined']
+  Params:  {'by': 'join_key'}
+
+Operation: op_030_exec
+  Type:    MATERIALIZE
+  Inputs:  ['ds_024_joined']
+  Outputs: ['ds_025_materialized']
+
+Operation: op_031_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_025_materialized']
+  Outputs: ['ds_026_derived']
+  Params:  {'target': 'dob_num', 'expression': 'NUMBER ( dob , F8.0 )'}
+
+Operation: op_032_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_026_derived']
+  Outputs: ['ds_027_derived']
+  Params:  {'target': 'claim_start_num', 'expression': 'NUMBER ( claim_start , F8.0 )'}
+
+Operation: op_033_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_027_derived']
+  Outputs: ['ds_028_derived']
+  Params:  {'target': 'claim_end_num', 'expression': 'NUMBER ( claim_end , F8.0 )'}
+
+Operation: op_034_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_028_derived']
+  Outputs: ['ds_029_derived']
+  Params:  {'target': 'dob_date', 'expression': 'DATE.MDY ( TRUNC ( MOD ( dob_num , 10000 ) / 100 ) , MOD ( dob_num , 100 ) , TRUNC ( dob_num / 10000 ) )'}
+
+Operation: op_035_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_029_derived']
+  Outputs: ['ds_030_derived']
+  Params:  {'target': 'claim_start_date', 'expression': 'DATE.MDY ( TRUNC ( MOD ( claim_start_num , 10000 ) / 100 ) , MOD ( claim_start_num , 100 ) , TRUNC ( claim_start_num / 10000 ) )'}
+
+Operation: op_036_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_030_derived']
+  Outputs: ['ds_031_derived']
+  Params:  {'target': 'claim_end_date', 'expression': 'DATE.MDY ( TRUNC ( MOD ( claim_end_num , 10000 ) / 100 ) , MOD ( claim_end_num , 100 ) , TRUNC ( claim_end_num / 10000 ) )'}
+
+Operation: op_037_generic
+  Type:    GENERIC_TRANSFORM
+  Inputs:  ['ds_031_derived']
+  Outputs: ['ds_032_generic']
+  Params:  {'command': 'FORMATS'}
+
+Operation: op_038_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_032_generic']
+  Outputs: ['ds_033_derived']
+  Params:  {'target': 'age_years', 'expression': 'TRUNC ( ( claim_start_date - dob_date ) / ( 365.25 * 86400 ) )'}
+
+Operation: op_039_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_033_derived']
+  Outputs: ['ds_034_derived']
+  Params:  {'target': 'age_valid', 'expression': '1'}
+
+Operation: op_040_generic
+  Type:    GENERIC_TRANSFORM
+  Inputs:  ['ds_034_derived']
+  Outputs: ['ds_035_generic']
+  Params:  {'command': 'IF'}
+
+Operation: op_041_generic
+  Type:    GENERIC_TRANSFORM
+  Inputs:  ['ds_035_generic']
+  Outputs: ['ds_036_generic']
+  Params:  {'command': 'IF'}
+
+Operation: op_042_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_036_generic']
+  Outputs: ['ds_037_derived']
+  Params:  {'target': 'status_valid', 'expression': '1'}
+
+Operation: op_043_generic
+  Type:    GENERIC_TRANSFORM
+  Inputs:  ['ds_037_derived']
+  Outputs: ['ds_038_generic']
+  Params:  {'command': 'IF'}
+
+Operation: op_044_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_038_generic']
+  Outputs: ['ds_039_derived']
+  Params:  {'target': 'ref_year', 'expression': 'TRUNC ( reference_month_n / 100 )'}
+
+Operation: op_045_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_039_derived']
+  Outputs: ['ds_040_derived']
+  Params:  {'target': 'ref_month', 'expression': 'MOD ( reference_month_n , 100 )'}
+
+Operation: op_046_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_040_derived']
+  Outputs: ['ds_041_derived']
+  Params:  {'target': 'month_start', 'expression': 'DATE.MDY ( ref_month , 1 , ref_year )'}
+
+Operation: op_047_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_041_derived']
+  Outputs: ['ds_042_derived']
+  Params:  {'target': 'month_end', 'expression': 'DATE.MDY ( ref_month + 1 , 1 , ref_year ) - 1'}
+
+Operation: op_048_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_042_derived']
+  Outputs: ['ds_043_derived']
+  Params:  {'target': 'eligible_start', 'expression': 'MAX ( claim_start_date , month_start )'}
+
+Operation: op_049_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_043_derived']
+  Outputs: ['ds_044_derived']
+  Params:  {'target': 'eligible_end', 'expression': 'MIN ( claim_end_date , month_end )'}
+
+Operation: op_050_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_044_derived']
+  Outputs: ['ds_045_derived']
+  Params:  {'target': 'eligible_days', 'expression': '( eligible_end - eligible_start ) / 86400 + 1'}
+
+Operation: op_051_generic
+  Type:    GENERIC_TRANSFORM
+  Inputs:  ['ds_045_derived']
+  Outputs: ['ds_046_generic']
+  Params:  {'command': 'IF'}
+
+Operation: op_052_sort
+  Type:    SORT_ROWS
+  Inputs:  ['ds_046_generic']
+  Outputs: ['ds_047_sorted']
+  Params:  {'keys': 'benefit_type'}
+
+Operation: op_053_join
+  Type:    JOIN
+  Inputs:  ['ds_047_sorted', 'file_benefit_rates.sav']
+  Outputs: ['ds_048_joined']
+  Params:  {'by': 'benefit_type'}
+
+Operation: op_054_exec
+  Type:    MATERIALIZE
+  Inputs:  ['ds_048_joined']
+  Outputs: ['ds_049_materialized']
+
+Operation: op_055_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_049_materialized']
+  Outputs: ['ds_050_derived']
+  Params:  {'target': 'daily_rate', 'expression': 'weekly_rate / 7'}
+
+Operation: op_056_compute
+  Type:    COMPUTE_COLUMNS
+  Inputs:  ['ds_050_derived']
+  Outputs: ['ds_051_derived']
+  Params:  {'target': 'payment_amount', 'expression': 'eligible_days * daily_rate'}
+
+Operation: op_057_filter
+  Type:    FILTER_ROWS
+  Inputs:  ['ds_051_derived']
+  Outputs: ['ds_052_filtered']
+  Params:  {'condition': '( age_valid = 1 AND status_valid = 1 AND eligible_days > 0 )'}
+
+Operation: op_058_aggregate
+  Type:    AGGREGATE
+  Inputs:  ['ds_052_filtered']
+  Outputs: ['ds_053_agg_active']
+  Params:  {'outfile': '*', 'break': ['benefit_type', 'region'], 'aggregations': ['TOTAL_PAID = SUM ( payment_amount )']}
+
+Operation: op_059_save
+  Type:    SAVE_BINARY
+  Inputs:  ['ds_053_agg_active']
+  Outputs: ['file_benefit_monthly_summary.csv']
+  Params:  {'filename': 'benefit_monthly_summary.csv'}

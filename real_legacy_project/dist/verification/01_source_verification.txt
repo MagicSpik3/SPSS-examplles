@@ -1,0 +1,13 @@
+Command: pspp example_pspp_final.sps
+Status: ✅ Success
+
+=== OUTPUT ===
+              Data List
++------------+----------+----------+
+|benefit_type|  region  |total_paid|
++------------+----------+----------+
+|ESA         |London    |    314.50|
+|ESA         |North East|   1665.00|
+|JSA         |London    |   1102.40|
+|JSA         |South West|    375.54|
++------------+----------+----------+

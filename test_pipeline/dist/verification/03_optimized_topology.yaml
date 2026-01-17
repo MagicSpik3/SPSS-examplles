@@ -1,4 +1,4 @@
-# Pipeline Topology: 23 Operations
+# Pipeline Topology: 21 Operations
 ----------------------------------------
 Operation: op_001_load
   Type:    LOAD_CSV
@@ -82,34 +82,22 @@ Operation: op_025_join
   Type:    JOIN
   Inputs:  ['ds_021_sorted', 'file_temp_regions.sav']
   Outputs: ['ds_022_joined']
-  Params:  {'by': 'region_code'}
+  Params:  {'by': ['region_code'], 'type': 'LEFT', 'right_table': 'temp_regions.sav'}
 
 Operation: op_026_exec
   Type:    MATERIALIZE
   Inputs:  ['ds_022_joined']
   Outputs: ['ds_023_materialized']
 
-Operation: op_028_generic
-  Type:    FILTER_ROWS
+Operation: batch_op_028_compute_if
+  Type:    BATCH_COMPUTE
   Inputs:  ['ds_023_materialized']
-  Outputs: ['ds_025_generic']
-  Params:  {'condition': 'unknown'}
-
-Operation: op_029_generic
-  Type:    FILTER_ROWS
-  Inputs:  ['ds_025_generic']
-  Outputs: ['ds_026_generic']
-  Params:  {'condition': 'unknown'}
-
-Operation: op_030_generic
-  Type:    FILTER_ROWS
-  Inputs:  ['ds_026_generic']
-  Outputs: ['ds_027_generic']
-  Params:  {'condition': 'unknown'}
+  Outputs: ['ds_027_derived']
+  Params:  {'computes': [{'target': 'income_band', 'expression': "'LOW'", 'condition': '( income < 20000 )'}, {'target': 'income_band', 'expression': "'MEDIUM'", 'condition': '( income >= 20000 AND income < 40000 )'}, {'target': 'income_band', 'expression': "'HIGH'", 'condition': '( income >= 40000 )'}]}
 
 Operation: op_031_exec
   Type:    MATERIALIZE
-  Inputs:  ['ds_027_generic']
+  Inputs:  ['ds_027_derived']
   Outputs: ['ds_028_materialized']
 
 Operation: op_032_aggregate
