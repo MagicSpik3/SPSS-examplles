@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"workbench.colorTheme": "Abyss"
+	},
+	"workbench.colorCustomizations": {
+		"window.activeBorder": "#ff0000",
+		"window.inactiveBorder": "#ff000080"
+	}
+	
+}
